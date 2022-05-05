@@ -1,15 +1,15 @@
-import { Avatar, Icon, Stack, Text } from "@chakra-ui/react";
+import { Avatar, Heading, HStack, Icon, Text } from "@chakra-ui/react";
 import React from "react";
 import { MdMenu } from "react-icons/md";
 
 export const NavBar = () => {
   return (
-    <Stack direction="row" justifyContent="space-between" my="2em">
-      <Stack direction="row" alignItems="center">
+    <HStack justifyContent="space-between" my="2em">
+      <HStack alignItems="center">
         <Icon as={MdMenu} />
         <Text>Dashboard</Text>
-      </Stack>
+      </HStack>
       <Avatar size="xs" />
-    </Stack>
+    </HStack>
   );
 };

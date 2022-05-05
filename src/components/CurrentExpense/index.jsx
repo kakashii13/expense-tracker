@@ -1,9 +1,11 @@
-import { Badge, Box, HStack, Stack, Text, VStack } from "@chakra-ui/react";
+import { Badge, Box, HStack, Stack, Text } from "@chakra-ui/react";
 import React from "react";
+import { useExpenseContext } from "../../context/ExpenseContext";
 
 export const CurrentExpense = () => {
+  const { amount } = useExpenseContext();
   return (
-    <Stack>
+    <Stack direction="column">
       <HStack
         bg="black"
         h="auto"
@@ -17,7 +19,7 @@ export const CurrentExpense = () => {
           <Badge bg="black" color="white" fontSize=".6em">
             $
           </Badge>
-          500
+          {amount}
         </Box>
         <Text color="gray.600">USD</Text>
       </HStack>
