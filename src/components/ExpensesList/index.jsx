@@ -1,8 +1,10 @@
 import { Flex, HStack, Icon, Stack, Text } from "@chakra-ui/react";
 import React from "react";
 import { AiOutlineGift } from "react-icons/ai";
+import { useExpenseContext } from "../../context/ExpenseContext";
 
 export const ExpensesList = () => {
+  const { items } = useExpenseContext();
   return (
     <Stack w="100%">
       <HStack
@@ -21,14 +23,14 @@ export const ExpensesList = () => {
             fontSize="2.5em"
           />
           <Flex direction="column">
-            <Text fontWeight="bold">Coffee</Text>
+            <Text fontWeight="bold">{items[1]?.category}</Text>
             <Text fontSize="xs" color="blackAlpha.700">
-              with flor
+              {items[1]?.description}
             </Text>
           </Flex>
         </HStack>
         <Stack>
-          <Text fontWeight="bold">$50</Text>
+          <Text fontWeight="bold">{`$ ${items[1]?.amount}`}</Text>
         </Stack>
       </HStack>
     </Stack>

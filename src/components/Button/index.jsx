@@ -1,7 +1,7 @@
 import { IconButton } from "@chakra-ui/react";
 import React from "react";
 
-export const AddButton = ({ icon }) => {
+export const AddButton = ({ icon, addItem }) => {
   return (
     <IconButton
       size="lg"
@@ -13,6 +13,7 @@ export const AddButton = ({ icon }) => {
       bottom="2em"
       right="2em"
       icon={icon}
+      onClick={addItem}
     />
   );
 };

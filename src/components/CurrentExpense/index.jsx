@@ -3,7 +3,11 @@ import React from "react";
 import { useExpenseContext } from "../../context/ExpenseContext";
 
 export const CurrentExpense = () => {
-  const { amount } = useExpenseContext();
+  const { items } = useExpenseContext();
+
+  const totalSpent = items
+    ?.map((item) => item.amount)
+    .reduce((el, acc) => el + acc, []);
   return (
     <Stack direction="column">
       <HStack
@@ -19,7 +23,7 @@ export const CurrentExpense = () => {
           <Badge bg="black" color="white" fontSize=".6em">
             $
           </Badge>
-          {amount}
+          {totalSpent}
         </Box>
         <Text color="gray.600">USD</Text>
       </HStack>

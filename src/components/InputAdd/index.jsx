@@ -12,6 +12,9 @@ import { useExpenseContext } from "../../context/ExpenseContext";
 
 export const InputAdd = () => {
   const { setAmount } = useExpenseContext();
+  const onChange = (target) => {
+    console.log(target.value);
+  };
   return (
     <HStack justifyContent="center">
       <InputGroup>
@@ -21,7 +24,7 @@ export const InputAdd = () => {
           fontSize="2em"
           children="$"
         />
-        <Input fontSize="2.8em" />
+        <Input fontSize="2.8em" onChange={({ target }) => onChange(target)} />
         <InputRightElement
           pointerEvents="none"
           color="gray.300"
