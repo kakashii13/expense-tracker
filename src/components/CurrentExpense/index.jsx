@@ -7,7 +7,9 @@ export const CurrentExpense = () => {
 
   const totalSpent = items
     ?.map((item) => item.amount)
-    .reduce((el, acc) => el + acc, []);
+    .reduce((el, acc) => Number(el) + Number(acc), []);
+
+  console.log(totalSpent);
   return (
     <Stack direction="column">
       <HStack
@@ -23,7 +25,7 @@ export const CurrentExpense = () => {
           <Badge bg="black" color="white" fontSize=".6em">
             $
           </Badge>
-          {totalSpent}
+          {totalSpent.length === 0 ? "0" : totalSpent}
         </Box>
         <Text color="gray.600">USD</Text>
       </HStack>

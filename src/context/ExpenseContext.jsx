@@ -7,6 +7,7 @@ export const useExpenseContext = () => useContext(expenseContext);
 export const ContextProvider = ({ children }) => {
   const [amount, setAmount] = useState(0);
   const [items, setItems] = useState([]);
+
   return (
     <expenseContext.Provider
       value={{

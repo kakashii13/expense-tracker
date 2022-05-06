@@ -55,7 +55,7 @@ export const AddAmount = () => {
             <Input
               fontSize="2.8em"
               onChange={({ target }) =>
-                setItemData({ ...itemData, amount: target.value })
+                setItemData({ ...itemData, amount: Number(target.value) })
               }
             />
             <InputRightElement
