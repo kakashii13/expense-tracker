@@ -13,6 +13,7 @@
     "@emotion/styled": "^11.8.1",
     "@fontsource/open-sans": "^4.5.8",
     "@fontsource/poppins": "^4.5.8",
+    "firebase": "^9.8.0",
     "framer-motion": "^6.3.3",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
