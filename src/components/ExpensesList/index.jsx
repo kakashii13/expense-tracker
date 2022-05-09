@@ -1,10 +1,30 @@
-import { Flex, HStack, Stack, Text } from "@chakra-ui/react";
+import { Flex, HStack, Icon, Stack, Text } from "@chakra-ui/react";
 import React from "react";
 import { useExpenseContext } from "../../context/ExpenseContext";
 import { ExpenseIcon } from "../ExpenseIcon";
+import { MdDelete } from "react-icons/md";
+import { collection, getFirestore, setDoc } from "firebase/firestore";
 
 export const ExpensesList = () => {
-  const { items } = useExpenseContext();
+  const { items, setItems } = useExpenseContext();
+
+  const onDelete = (id) => {
+    const newItems = [...items];
+
+    const itemIndex = newItems.findIndex((item) => item.id === id);
+
+    console.log(itemIndex);
+
+    newItems.splice(itemIndex, 1);
+
+    // const db = getFirestore();
+    // const queryCollection = collection(db, "expenses");
+
+    // setDoc(queryCollection, newItems);
+    console.log(newItems);
+    setItems(newItems);
+  };
+
   return (
     <Stack w="100%">
       {items?.length !== 0 ? (
@@ -25,9 +45,14 @@ export const ExpensesList = () => {
                 </Text>
               </Flex>
             </HStack>
-            <Stack>
+            <HStack>
               <Text fontWeight="bold">{`$ ${item.amount}`}</Text>
-            </Stack>
+              <Icon
+                as={MdDelete}
+                cursor="pointer"
+                onClick={() => onDelete(item.id)}
+              />
+            </HStack>
           </HStack>
         ))
       ) : (

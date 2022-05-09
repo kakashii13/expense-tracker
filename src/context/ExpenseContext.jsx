@@ -5,19 +5,23 @@ const expenseContext = createContext();
 
 export const useExpenseContext = () => useContext(expenseContext);
 
+const INITIAL_STATE = [
+  { id: 1, category: "Health", amount: 300, description: "InitialState" },
+];
+
 export const ContextProvider = ({ children }) => {
   const [amount, setAmount] = useState(0);
-  const [items, setItems] = useState();
+  const [items, setItems] = useState(INITIAL_STATE);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const db = getFirestore();
+    // const db = getFirestore();
 
-    const queryCollection = collection(db, "expenses");
+    // const queryCollection = collection(db, "expenses");
 
-    getDocs(queryCollection).then((resp) =>
-      setItems(resp.docs.map((prod) => ({ id: prod.id, ...prod.data() })))
-    );
+    // getDocs(queryCollection).then((resp) =>
+    //   setItems(resp.docs.map((prod) => ({ id: prod.id, ...prod.data() })))
+    // );
     setTimeout(() => {
       setLoading(false);
     }, 1000);

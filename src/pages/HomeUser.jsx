@@ -7,13 +7,13 @@ import { Expenses } from "../components/Expenses";
 import { NavBar } from "../components/NavBar";
 import { MdAdd } from "react-icons/md";
 
-export const Home = () => {
+export const HomeUser = () => {
   return (
     <Stack>
       <NavBar />
       <CurrentExpense />
       <Expenses />
-      <Link to="detail">
+      <Link to="/user/add">
         <AddButton icon={<MdAdd />} />
       </Link>
     </Stack>

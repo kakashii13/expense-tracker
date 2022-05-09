@@ -17,5 +17,9 @@ export const theme = extendTheme({
         margin: "0 10px 0 0",
       },
     },
+    Button: {
+      baseStyle: {},
+      variants: {},
+    },
   },
 });

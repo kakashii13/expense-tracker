@@ -1,8 +1,9 @@
 import { Container } from "@chakra-ui/react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AddSpent } from "./pages/AddSpent";
-import { Home } from "./pages/Home";
+import { HomeUser } from "./pages/HomeUser";
 import { ContextProvider } from "./context/ExpenseContext";
+import { Auth } from "./pages/Auth";
 
 function App() {
   return (
@@ -10,8 +11,9 @@ function App() {
       <ContextProvider>
         <Container maxW="md" h="100%">
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/:add" element={<AddSpent />} />
+            <Route path="/" element={<Auth />} />
+            <Route path="/:user" element={<HomeUser />} />
+            <Route path="/user/add" element={<AddSpent />} />
           </Routes>
         </Container>
       </ContextProvider>
