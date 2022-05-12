@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AddSpent } from "./pages/AddSpent";
 import { HomeUser } from "./pages/HomeUser";
 import { ContextProvider } from "./context/ExpenseContext";
-import { Auth } from "./pages/Auth";
+import { Login } from "./pages/Login";
 
 function App() {
   return (
@@ -11,8 +11,8 @@ function App() {
       <ContextProvider>
         <Container maxW="md" h="100%">
           <Routes>
-            <Route path="/" element={<Auth />} />
-            <Route path="/:user" element={<HomeUser />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<HomeUser />} />
             <Route path="/user/add" element={<AddSpent />} />
           </Routes>
         </Container>

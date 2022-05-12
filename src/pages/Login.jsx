@@ -1,6 +1,7 @@
 import {
   Button,
   FormLabel,
+  Heading,
   HStack,
   Input,
   Link,
@@ -10,40 +11,28 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-export const Auth = () => {
+export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  //   const auth = getAuth();
-  //   createUserWithEmailAndPassword(auth, email, password)
-  //     .then((userCredential) => {
-  //       // Signed in
-  //       const user = userCredential.user;
-  //       // ...
-  //     })
-  //     .catch((error) => {
-  //       const errorCode = error.code;
-  //       const errorMessage = error.message;
-  //       // ..
-  //     });
 
   return (
     <VStack justifyContent="center" h="100%" spacing={10}>
       <Stack
-        spacing={3}
+        spacing={4}
         bg="gray.50"
         p="2em"
         border="1px solid #ddd"
         borderRadius="0.5em"
       >
-        <FormLabel htmlFor="email">Email address</FormLabel>
+        <Heading textAlign="center">Log in</Heading>
+        <FormLabel htmlFor="email">Email</FormLabel>
         <Input
           id="email"
           type="email"
           bg="white"
           onChange={({ target }) => setEmail(target.value)}
         />
-        <FormLabel htmlFor="password">Password address</FormLabel>
+        <FormLabel htmlFor="password">Password</FormLabel>
         <Input
           pr="4.5rem"
           bg="white"
@@ -59,7 +48,7 @@ export const Auth = () => {
           _active={{}}
           //   onClick={signIn}
         >
-          Sign in
+          Login
         </Button>
       </Stack>
       <HStack
