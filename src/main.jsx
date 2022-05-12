@@ -8,9 +8,7 @@ import { getFirestoreApp } from "./firebase/config";
 getFirestoreApp();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <ChakraProvider theme={theme}>
-      <App />
-    </ChakraProvider>
-  </React.StrictMode>
+  <ChakraProvider theme={theme}>
+    <App />
+  </ChakraProvider>
 );

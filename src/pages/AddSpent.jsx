@@ -11,11 +11,21 @@ import { Link, useNavigate } from "react-router-dom";
 import { AddButton } from "../components/Button";
 import { MdOutlineCheckCircle, MdKeyboardArrowLeft } from "react-icons/md";
 import { AddForm } from "../components/AddForm";
-import { addDoc, collection, getFirestore } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  getFirestore,
+  setDoc,
+} from "firebase/firestore";
+import { useExpenseContext } from "../context/ExpenseContext";
+import { v4 } from "uuid";
 
 export const AddSpent = () => {
+  const { currentUser, items } = useExpenseContext();
   const [alert, setAlert] = useState(false);
   const [itemData, setItemData] = useState({
+    id: "",
     amount: "",
     category: undefined,
     description: "",
@@ -25,15 +35,19 @@ export const AddSpent = () => {
   //create change route
   let navigate = useNavigate();
 
+  console.log(items[0].expenses);
+
   const addItem = () => {
+    //add user to expense
+    const expenseUser = {
+      user: currentUser.email,
+      expenses: items[0].expenses.push({ ...itemData, id: v4() }),
+    };
+
     // add to firebase
-
     const db = getFirestore();
-    const queryCollection = collection(db, "expenses");
 
-    addDoc(queryCollection, itemData);
-
-    // setItems(copyTest);
+    setDoc(doc(db, "usersExpenses", `${currentUser.uid}`), expenseUser);
     setAlert(true);
     setItemData({
       amount: "",
@@ -52,7 +66,7 @@ export const AddSpent = () => {
   return (
     <Stack spacing={10}>
       <HStack my="1em">
-        <Link to="/user">
+        <Link to="/">
           <IconButton icon={<MdKeyboardArrowLeft />} fontSize="1.5em" />
         </Link>
         <Text fontWeight="bold">Add Amount</Text>

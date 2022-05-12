@@ -4,6 +4,8 @@ import { AddSpent } from "./pages/AddSpent";
 import { HomeUser } from "./pages/HomeUser";
 import { ContextProvider } from "./context/ExpenseContext";
 import { Login } from "./pages/Login";
+import { Signup } from "./pages/SignUp";
+import { PrivateRoute } from "./components/PrivateRoute";
 
 function App() {
   return (
@@ -12,7 +14,15 @@ function App() {
         <Container maxW="md" h="100%">
           <Routes>
             <Route path="/login" element={<Login />} />
-            <Route path="/" element={<HomeUser />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route
+              path="/"
+              element={
+                <PrivateRoute>
+                  <HomeUser />
+                </PrivateRoute>
+              }
+            />
             <Route path="/user/add" element={<AddSpent />} />
           </Routes>
         </Container>

@@ -5,8 +5,8 @@ import { useExpenseContext } from "../../context/ExpenseContext";
 export const CurrentExpense = () => {
   const { items } = useExpenseContext();
 
-  const totalSpent = items
-    ?.map((item) => item.amount)
+  const totalSpent = items[0]?.expenses
+    .map((item) => item.amount)
     .reduce((el, acc) => Number(el) + Number(acc), []);
 
   return (

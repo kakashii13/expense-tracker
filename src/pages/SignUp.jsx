@@ -16,20 +16,20 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
-export const Login = () => {
+export const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { login } = useAuth(email, password);
+  const { signup } = useAuth(email, password);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await login(email, password);
+      await signup(email, password);
       navigate("/");
     } catch {
-      setError("Failed to log in");
+      setError("Failed to create an account");
       setTimeout(() => {
         setError("");
       }, 1000);
@@ -45,11 +45,11 @@ export const Login = () => {
         border="1px solid #ddd"
         borderRadius="0.5em"
       >
-        <Heading textAlign="center">Log In</Heading>
+        <Heading textAlign="center">Sign Up</Heading>
         {error && (
           <Alert status="error">
             <AlertIcon />
-            <AlertTitle>Failed to login</AlertTitle>
+            <AlertTitle>Failed to create an account</AlertTitle>
           </Alert>
         )}
         <form onSubmit={handleSubmit}>
@@ -61,14 +61,7 @@ export const Login = () => {
               bg="white"
               onChange={({ target }) => setEmail(target.value)}
             />
-            <HStack justifyContent="space-between">
-              <FormLabel htmlFor="password" mt="10px">
-                Password
-              </FormLabel>
-              <Link to="/forgot-password">
-                <Text color="blue.500">Forgot password?</Text>
-              </Link>
-            </HStack>
+            <FormLabel htmlFor="password">Password</FormLabel>
             <Input
               pr="4.5rem"
               bg="white"
@@ -86,7 +79,7 @@ export const Login = () => {
               _active={{}}
               type="submit"
             >
-              Login
+              Sign up
             </Button>
           </FormControl>
         </form>
@@ -99,9 +92,9 @@ export const Login = () => {
         justifyContent="center"
       >
         <HStack>
-          <Text mx="0">New to Expense Tracker?</Text>
-          <Link to="/signup">
-            <Text color="blue.500">Create an account</Text>
+          <Text mx="0">Already have an account?</Text>
+          <Link to="/login">
+            <Text color="blue.500">Login</Text>
           </Link>
         </HStack>
       </HStack>
