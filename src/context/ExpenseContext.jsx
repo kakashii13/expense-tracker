@@ -1,4 +1,4 @@
-import { collection, getDocs, getFirestore } from "firebase/firestore";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 import { createContext, useContext, useState, useEffect } from "react";
 import { auth } from "../firebase/config";
 
@@ -16,8 +16,6 @@ export const ContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState("");
 
-  console.log(items);
-
   useEffect(() => {
     const unsubscriber = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
@@ -28,13 +26,15 @@ export const ContextProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    const db = getFirestore();
+    const getExpenses = async () => {
+      const db = getFirestore();
 
-    const queryCollection = collection(db, "usersExpenses");
+      const docRef = doc(db, "usersExpenses", `${currentUser.uid}`);
+      const docSnap = await getDoc(docRef);
 
-    getDocs(queryCollection).then((resp) =>
-      setItems(resp.docs.map((prod) => ({ id: prod.id, ...prod.data() })))
-    );
+      setItems(docSnap.data());
+    };
+    getExpenses();
     setTimeout(() => {
       setLoading(false);
     }, 1000);

@@ -39,7 +39,7 @@ export const AddSpent = () => {
     //add user to expense
     const expenseUser = {
       user: currentUser.email,
-      expenses: items[0] ? arrayUnion(itemData) : [itemData],
+      expenses: [itemData],
     };
 
     console.log(items);
@@ -48,11 +48,13 @@ export const AddSpent = () => {
     const db = getFirestore();
     const userRef = doc(db, "usersExpenses", `${currentUser.uid}`);
 
-    // setDoc(doc(db, "usersExpenses", `${currentUser.uid}`), expenseUser);
-
-    updateDoc(userRef, {
-      expenses: arrayUnion(itemData),
-    });
+    if (items) {
+      updateDoc(userRef, {
+        expenses: arrayUnion(itemData),
+      });
+    } else {
+      setDoc(userRef, expenseUser);
+    }
 
     setAlert(true);
     setItemData({

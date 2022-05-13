@@ -11,9 +11,9 @@ export const ExpensesList = () => {
   const onDelete = (id) => {
     const newItems = [...items];
 
-    const itemIndex = newItems[0]?.expenses.findIndex((item) => item.id === id);
+    const itemIndex = newItems.expenses?.findIndex((item) => item.id === id);
 
-    newItems[0]?.expenses.splice(itemIndex, 1);
+    newItems.expenses?.splice(itemIndex, 1);
 
     // const db = getFirestore();
     // const queryCollection = collection(db, "expenses");
@@ -25,7 +25,7 @@ export const ExpensesList = () => {
   return (
     <Stack w="100%">
       {items?.length !== 0 ? (
-        items[0]?.expenses.map((item) => (
+        items.expenses?.map((item) => (
           <HStack
             key={item.description}
             justifyContent="space-between"

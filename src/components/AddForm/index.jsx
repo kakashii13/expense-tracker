@@ -3,7 +3,6 @@ import {
   FormControl,
   HStack,
   Input,
-  InputGroup,
   InputLeftElement,
   InputRightElement,
   NumberInput,
