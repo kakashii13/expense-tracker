@@ -16,6 +16,8 @@ export const ContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState("");
 
+  console.log(items);
+
   useEffect(() => {
     const unsubscriber = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
@@ -36,7 +38,6 @@ export const ContextProvider = ({ children }) => {
     setTimeout(() => {
       setLoading(false);
     }, 1000);
-    console.log(items);
   }, []);
 
   return (

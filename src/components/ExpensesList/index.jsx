@@ -11,9 +11,9 @@ export const ExpensesList = () => {
   const onDelete = (id) => {
     const newItems = [...items];
 
-    const itemIndex = newItems[0].expenses.findIndex((item) => item.id === id);
+    const itemIndex = newItems[0]?.expenses.findIndex((item) => item.id === id);
 
-    newItems[0].expenses.splice(itemIndex, 1);
+    newItems[0]?.expenses.splice(itemIndex, 1);
 
     // const db = getFirestore();
     // const queryCollection = collection(db, "expenses");

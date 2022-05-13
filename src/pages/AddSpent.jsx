@@ -6,26 +6,26 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AddButton } from "../components/Button";
 import { MdOutlineCheckCircle, MdKeyboardArrowLeft } from "react-icons/md";
 import { AddForm } from "../components/AddForm";
 import {
-  addDoc,
-  collection,
+  arrayUnion,
   doc,
   getFirestore,
   setDoc,
+  updateDoc,
 } from "firebase/firestore";
 import { useExpenseContext } from "../context/ExpenseContext";
-import { v4 } from "uuid";
+import { v4 as uuidv4 } from "uuid";
 
 export const AddSpent = () => {
   const { currentUser, items } = useExpenseContext();
   const [alert, setAlert] = useState(false);
   const [itemData, setItemData] = useState({
-    id: "",
+    id: uuidv4(),
     amount: "",
     category: undefined,
     description: "",
@@ -35,19 +35,25 @@ export const AddSpent = () => {
   //create change route
   let navigate = useNavigate();
 
-  console.log(items[0].expenses);
-
   const addItem = () => {
     //add user to expense
     const expenseUser = {
       user: currentUser.email,
-      expenses: items[0].expenses.push({ ...itemData, id: v4() }),
+      expenses: items[0] ? arrayUnion(itemData) : [itemData],
     };
+
+    console.log(items);
 
     // add to firebase
     const db = getFirestore();
+    const userRef = doc(db, "usersExpenses", `${currentUser.uid}`);
 
-    setDoc(doc(db, "usersExpenses", `${currentUser.uid}`), expenseUser);
+    // setDoc(doc(db, "usersExpenses", `${currentUser.uid}`), expenseUser);
+
+    updateDoc(userRef, {
+      expenses: arrayUnion(itemData),
+    });
+
     setAlert(true);
     setItemData({
       amount: "",
