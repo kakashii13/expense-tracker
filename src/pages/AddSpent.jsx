@@ -42,8 +42,6 @@ export const AddSpent = () => {
       expenses: [itemData],
     };
 
-    console.log(items);
-
     // add to firebase
     const db = getFirestore();
     const userRef = doc(db, "usersExpenses", `${currentUser.uid}`);

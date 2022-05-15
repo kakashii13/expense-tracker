@@ -1,25 +1,41 @@
-import { Flex, HStack, Icon, Stack, Text } from "@chakra-ui/react";
-import React from "react";
+import {
+  Flex,
+  HStack,
+  Icon,
+  Stack,
+  Text,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+} from "@chakra-ui/react";
+import React, { useState } from "react";
 import { useExpenseContext } from "../../context/ExpenseContext";
 import { ExpenseIcon } from "../ExpenseIcon";
 import { MdDelete } from "react-icons/md";
-import { collection, getFirestore, setDoc } from "firebase/firestore";
+import { doc, getFirestore, updateDoc } from "firebase/firestore";
 
 export const ExpensesList = () => {
-  const { items, setItems } = useExpenseContext();
+  const [alert, setAlert] = useState(false);
+  const { items, currentUser } = useExpenseContext();
 
-  const onDelete = (id) => {
-    const newItems = [...items];
+  const onDelete = async (id) => {
+    const newItems = [...items.expenses];
 
-    const itemIndex = newItems.expenses?.findIndex((item) => item.id === id);
+    const itemIndex = newItems?.findIndex((item) => item.id === id);
 
-    newItems.expenses?.splice(itemIndex, 1);
+    newItems?.splice(itemIndex, 1);
 
-    // const db = getFirestore();
-    // const queryCollection = collection(db, "expenses");
+    const db = getFirestore();
+    const userRef = doc(db, "usersExpenses", `${currentUser.uid}`);
 
-    // setDoc(queryCollection, newItems);
-    setItems(newItems);
+    await updateDoc(userRef, {
+      expenses: newItems,
+    });
+
+    setAlert(true);
+    setTimeout(() => {
+      setAlert(false);
+    }, 1000);
   };
 
   return (
@@ -27,7 +43,7 @@ export const ExpensesList = () => {
       {items?.length !== 0 ? (
         items.expenses?.map((item) => (
           <HStack
-            key={item.description}
+            key={item.id}
             justifyContent="space-between"
             bg="gray.100"
             p=".8em"
@@ -54,6 +70,20 @@ export const ExpensesList = () => {
         ))
       ) : (
         <Text>You don't have expenses</Text>
+      )}
+      {alert && (
+        <Alert
+          position="relative"
+          top="-390"
+          // width="50%"
+          status="success"
+          background="white"
+          border="1px solid #ddd"
+          borderRadius="3px"
+        >
+          <AlertIcon />
+          <AlertTitle>You've deleted an expense</AlertTitle>
+        </Alert>
       )}
     </Stack>
   );

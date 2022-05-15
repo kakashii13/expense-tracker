@@ -3,6 +3,7 @@ import {
   AlertIcon,
   AlertTitle,
   Avatar,
+  Button,
   Heading,
   HStack,
   Menu,
@@ -53,7 +54,7 @@ export const NavBar = () => {
             <Avatar size="sm" cursor="pointer" />
           </MenuButton>
           <MenuList>
-            <MenuGroup title="Profile">
+            <MenuGroup>
               <MenuItem>My Account</MenuItem>
             </MenuGroup>
             <MenuDivider />

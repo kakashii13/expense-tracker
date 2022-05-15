@@ -1,4 +1,4 @@
-import { doc, getDoc, getFirestore } from "firebase/firestore";
+import { doc, getDoc, getFirestore, onSnapshot } from "firebase/firestore";
 import { createContext, useContext, useState, useEffect } from "react";
 import { auth } from "../firebase/config";
 
@@ -29,16 +29,18 @@ export const ContextProvider = ({ children }) => {
     const getExpenses = async () => {
       const db = getFirestore();
 
-      const docRef = doc(db, "usersExpenses", `${currentUser.uid}`);
-      const docSnap = await getDoc(docRef);
-
-      setItems(docSnap.data());
+      if (currentUser) {
+        const docRef = doc(db, "usersExpenses", `${currentUser.uid}`);
+        onSnapshot(docRef, (doc) => {
+          setItems(doc.data());
+        });
+      }
     };
     getExpenses();
     setTimeout(() => {
       setLoading(false);
     }, 1000);
-  }, []);
+  }, [currentUser]);
 
   return (
     <expenseContext.Provider
