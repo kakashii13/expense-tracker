@@ -7,6 +7,7 @@ import {
   Alert,
   AlertIcon,
   AlertTitle,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useExpenseContext } from "../../context/ExpenseContext";
@@ -35,17 +36,19 @@ export const ExpensesList = () => {
     setAlert(true);
     setTimeout(() => {
       setAlert(false);
-    }, 1000);
+    }, 2000);
   };
 
+  const bg = useColorModeValue("gray.100", "whiteAlpha.50");
+  const color = useColorModeValue("blackAlpha.700", "whiteAlpha.700");
   return (
     <Stack w="100%">
-      {items?.length !== 0 ? (
+      {items?.expenses.length !== 0 ? (
         items.expenses?.map((item) => (
           <HStack
             key={item.id}
             justifyContent="space-between"
-            bg="gray.100"
+            bg={bg}
             p=".8em"
             borderRadius="1.5em"
           >
@@ -53,7 +56,7 @@ export const ExpensesList = () => {
               <ExpenseIcon icon={item.icon} />
               <Flex direction="column">
                 <Text fontWeight="bold">{item.category}</Text>
-                <Text fontSize="xs" color="blackAlpha.700">
+                <Text fontSize="xs" color={color}>
                   {item.description}
                 </Text>
               </Flex>
@@ -75,11 +78,11 @@ export const ExpensesList = () => {
         <Alert
           position="relative"
           top="-390"
-          // width="50%"
+          boxShadow="md"
           status="success"
-          background="white"
+          bg="white"
           border="1px solid #ddd"
-          borderRadius="3px"
+          borderRadius=".5em"
         >
           <AlertIcon />
           <AlertTitle>You've deleted an expense</AlertTitle>

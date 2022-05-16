@@ -23,7 +23,14 @@ function App() {
                 </PrivateRoute>
               }
             />
-            <Route path="/user/add" element={<AddSpent />} />
+            <Route
+              path="/user/add"
+              element={
+                <PrivateRoute>
+                  <AddSpent />
+                </PrivateRoute>
+              }
+            />
           </Routes>
         </Container>
       </ContextProvider>

@@ -4,16 +4,18 @@ import React from "react";
 export const AddButton = ({ icon, addItem }) => {
   return (
     <IconButton
+      fontSize="1.5em"
       size="lg"
       w="1em"
       borderRadius="50%"
-      bg="black"
+      bg="purple.500"
       color="white"
       position="absolute"
-      bottom="2em"
-      right="2em"
+      bottom="10"
+      right="10"
       icon={icon}
       onClick={addItem}
+      _hover={{}}
     />
   );
 };

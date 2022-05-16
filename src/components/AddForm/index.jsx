@@ -1,38 +1,65 @@
-import React from "react";
+import React, { useState } from "react";
 import {
+  Button,
   FormControl,
+  FormLabel,
   HStack,
+  Icon,
   Input,
-  InputLeftElement,
-  InputRightElement,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
   NumberInput,
   NumberInputField,
-  Select,
   Stack,
+  Text,
 } from "@chakra-ui/react";
 import {
   MdShoppingCart,
   MdOutlineCreditCard,
   MdOutlineHealthAndSafety,
+  MdDirectionsCar,
+  MdFlight,
+  MdLightbulbOutline,
+  MdOutlineShoppingBag,
+  MdOutlineHome,
+  MdOutlineMenuBook,
+  MdOutlineAttachMoney,
+  MdKeyboardArrowDown,
 } from "react-icons/md";
+import { GiClothes } from "react-icons/gi";
 import { ExpenseIcon } from "../ExpenseIcon";
 
 const CATEGORIES = [
   { name: "Market", icon: MdShoppingCart },
   { name: "Card", icon: MdOutlineCreditCard },
   { name: "Health", icon: MdOutlineHealthAndSafety },
+  { name: "Car", icon: MdDirectionsCar },
+  { name: "Holidays", icon: MdFlight },
+  { name: "Light", icon: MdLightbulbOutline },
+  { name: "Shopping", icon: MdOutlineShoppingBag },
+  { name: "Rent", icon: MdOutlineHome },
+  { name: "Education", icon: MdOutlineMenuBook },
+  { name: "Taxes", icon: MdOutlineAttachMoney },
+  { name: "Clothing", icon: GiClothes },
 ];
 
 export const AddForm = ({ setItemData, itemData }) => {
+  const [selectCategory, setSelectCategory] = useState("Select");
+
+  const handleSelect = (category) => {
+    setSelectCategory(category.name);
+    setItemData({
+      ...itemData,
+      category: category.name,
+      icon: category.icon.name,
+    });
+  };
   return (
     <FormControl>
-      <HStack justifyContent="center" spacing={5}>
-        <InputLeftElement
-          pointerEvents="none"
-          color="gray.600"
-          fontSize="1.5em"
-          children="$"
-        />
+      <Stack justifyContent="center" spacing={5}>
+        <FormLabel>Amount</FormLabel>
         <NumberInput variant="flushed" precision={2} step={0.2}>
           <NumberInputField
             fontSize="2em"
@@ -42,34 +69,33 @@ export const AddForm = ({ setItemData, itemData }) => {
             }
           />
         </NumberInput>
-        <InputRightElement
-          pointerEvents="none"
-          color="gray.300s"
-          fontSize=".5em"
-          children="USD"
-        />
-      </HStack>
+      </Stack>
       <Stack my={5}>
-        <Select
-          placeholder="Expense made for"
-          variant="flushed"
-          onChange={(e) =>
-            setItemData({
-              ...itemData,
-              category: e.target.value,
-            })
-          }
-        >
-          {CATEGORIES.map((category) => (
-            <option key={category.name} value={category.name}>
-              {category.name}
-            </option>
-          ))}
-        </Select>
+        <FormLabel>Expense made for</FormLabel>
+        <Menu>
+          <MenuButton as={Button}>
+            <HStack justifyContent="space-between">
+              <Text>{selectCategory}</Text>
+              <Icon as={MdKeyboardArrowDown} />
+            </HStack>
+          </MenuButton>
+          <MenuList>
+            {CATEGORIES.map((category) => (
+              <MenuItem
+                key={category.name}
+                onClick={() => handleSelect(category)}
+              >
+                <ExpenseIcon icon={category.icon} />
+                <Text ml=".6em">{category.name}</Text>
+              </MenuItem>
+            ))}
+          </MenuList>
+        </Menu>
       </Stack>
       <Stack my={0}>
+        <FormLabel>Description</FormLabel>
         <Input
-          placeholder="Description"
+          // placeholder="Description"
           variant="flushed"
           value={itemData.description}
           onChange={({ target }) =>

@@ -10,6 +10,7 @@ import {
   Input,
   Stack,
   Text,
+  useColorModeValue,
   VStack,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
@@ -36,13 +37,15 @@ export const Login = () => {
     }
   };
 
+  const bg = useColorModeValue("gray.50", "gray.700");
+
   return (
     <VStack justifyContent="center" h="100%" spacing={10}>
       <Stack
         spacing={4}
-        bg="gray.50"
+        bg={bg}
         p="2em"
-        border="1px solid #ddd"
+        border="1px solid gray.500"
         borderRadius="0.5em"
       >
         <Heading textAlign="center">Log In</Heading>

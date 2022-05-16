@@ -70,7 +70,7 @@ export const AddSpent = () => {
   };
 
   return (
-    <Stack spacing={10}>
+    <Stack spacing={20}>
       <HStack my="1em">
         <Link to="/">
           <IconButton icon={<MdKeyboardArrowLeft />} fontSize="1.5em" />
