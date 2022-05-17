@@ -29,7 +29,6 @@ export const AddSpent = () => {
     amount: "",
     category: undefined,
     description: "",
-    icon: "",
   });
 
   //create change route

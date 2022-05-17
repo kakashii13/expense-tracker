@@ -15,35 +15,9 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import {
-  MdShoppingCart,
-  MdOutlineCreditCard,
-  MdOutlineHealthAndSafety,
-  MdDirectionsCar,
-  MdFlight,
-  MdLightbulbOutline,
-  MdOutlineShoppingBag,
-  MdOutlineHome,
-  MdOutlineMenuBook,
-  MdOutlineAttachMoney,
-  MdKeyboardArrowDown,
-} from "react-icons/md";
-import { GiClothes } from "react-icons/gi";
+import { MdKeyboardArrowDown } from "react-icons/md";
 import { ExpenseIcon } from "../ExpenseIcon";
-
-const CATEGORIES = [
-  { name: "Market", icon: MdShoppingCart },
-  { name: "Card", icon: MdOutlineCreditCard },
-  { name: "Health", icon: MdOutlineHealthAndSafety },
-  { name: "Car", icon: MdDirectionsCar },
-  { name: "Holidays", icon: MdFlight },
-  { name: "Light", icon: MdLightbulbOutline },
-  { name: "Shopping", icon: MdOutlineShoppingBag },
-  { name: "Rent", icon: MdOutlineHome },
-  { name: "Education", icon: MdOutlineMenuBook },
-  { name: "Taxes", icon: MdOutlineAttachMoney },
-  { name: "Clothing", icon: GiClothes },
-];
+import { CATEGORIES } from "../Categories";
 
 export const AddForm = ({ setItemData, itemData }) => {
   const [selectCategory, setSelectCategory] = useState("Select");
@@ -53,7 +27,6 @@ export const AddForm = ({ setItemData, itemData }) => {
     setItemData({
       ...itemData,
       category: category.name,
-      icon: category.icon.name,
     });
   };
   return (

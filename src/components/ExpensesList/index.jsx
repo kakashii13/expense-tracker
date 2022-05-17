@@ -13,9 +13,10 @@ import {
 import React, { useState } from "react";
 import { useExpenseContext } from "../../context/ExpenseContext";
 import { ExpenseIcon } from "../ExpenseIcon";
-import { MdDelete, MdOutlineCreditCard } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 import { doc, getFirestore, updateDoc } from "firebase/firestore";
 import { IoWalletOutline } from "react-icons/io5";
+import { CATEGORIES } from "../Categories";
 
 export const ExpensesList = () => {
   const [alert, setAlert] = useState(false);
@@ -34,8 +35,8 @@ export const ExpensesList = () => {
     await updateDoc(userRef, {
       expenses: newItems,
     });
-
     setAlert(true);
+
     setTimeout(() => {
       setAlert(false);
     }, 2000);
@@ -55,8 +56,11 @@ export const ExpensesList = () => {
             borderRadius="1.5em"
           >
             <HStack spacing={5}>
-              {/* <ExpenseIcon icon={item.icon} /> */}
-              <Icon as={`<${item.icon}/>`} />
+              <ExpenseIcon
+                icon={
+                  CATEGORIES.filter((x) => x.name === item.category)[0].icon
+                }
+              />
               <Flex direction="column">
                 <Text fontWeight="bold">{item.category}</Text>
                 <Text fontSize="xs" color={color}>

@@ -20,6 +20,7 @@ import { useAuth } from "../hooks/useAuth";
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const { login } = useAuth(email, password);
   const navigate = useNavigate();
@@ -27,12 +28,14 @@ export const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       await login(email, password);
       navigate("/");
     } catch {
       setError("Failed to log in");
       setTimeout(() => {
         setError("");
+        setLoading(false);
       }, 1000);
     }
   };
@@ -79,6 +82,7 @@ export const Login = () => {
               onChange={({ target }) => setPassword(target.value)}
             />
             <Button
+              isLoading={loading ? true : false}
               width="100%"
               mt="20px"
               bg="blue.700"
