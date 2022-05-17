@@ -6,7 +6,7 @@ export const theme = extendTheme({
     useSystemColorMode: false,
   },
   fonts: {
-    body: "Open Sans, sans-serif",
+    body: "Raleway, sans-serif",
   },
   styles: {
     global: {

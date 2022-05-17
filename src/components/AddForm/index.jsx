@@ -59,10 +59,10 @@ export const AddForm = ({ setItemData, itemData }) => {
   return (
     <FormControl>
       <Stack justifyContent="center" spacing={5}>
-        <FormLabel>Amount</FormLabel>
-        <NumberInput variant="flushed" precision={2} step={0.2}>
+        <NumberInput precision={2} step={0.2}>
+          <FormLabel>Amount</FormLabel>
           <NumberInputField
-            fontSize="2em"
+            // fontSize="2em"
             value={itemData.amount}
             onChange={({ target }) =>
               setItemData({ ...itemData, amount: Number(target.value) })
@@ -71,7 +71,7 @@ export const AddForm = ({ setItemData, itemData }) => {
         </NumberInput>
       </Stack>
       <Stack my={5}>
-        <FormLabel>Expense made for</FormLabel>
+        <FormLabel>Expense category</FormLabel>
         <Menu>
           <MenuButton as={Button}>
             <HStack justifyContent="space-between">
@@ -79,7 +79,7 @@ export const AddForm = ({ setItemData, itemData }) => {
               <Icon as={MdKeyboardArrowDown} />
             </HStack>
           </MenuButton>
-          <MenuList>
+          <MenuList maxH="20em" overflowY="scroll">
             {CATEGORIES.map((category) => (
               <MenuItem
                 key={category.name}
@@ -95,8 +95,6 @@ export const AddForm = ({ setItemData, itemData }) => {
       <Stack my={0}>
         <FormLabel>Description</FormLabel>
         <Input
-          // placeholder="Description"
-          variant="flushed"
           value={itemData.description}
           onChange={({ target }) =>
             setItemData({ ...itemData, description: target.value })

@@ -6,7 +6,7 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AddButton } from "../components/Button";
 import { MdOutlineCheckCircle, MdKeyboardArrowLeft } from "react-icons/md";
@@ -70,7 +70,7 @@ export const AddSpent = () => {
   };
 
   return (
-    <Stack spacing={20}>
+    <Stack spacing={20} height="100%" position="relative">
       <HStack my="1em">
         <Link to="/">
           <IconButton icon={<MdKeyboardArrowLeft />} fontSize="1.5em" />
@@ -92,7 +92,9 @@ export const AddSpent = () => {
       ) : (
         ""
       )}
-      <AddButton icon={<MdOutlineCheckCircle />} addItem={addItem} />
+      <Stack position="absolute" bottom="10" right="0">
+        <AddButton icon={<MdOutlineCheckCircle />} addItem={addItem} />
+      </Stack>
     </Stack>
   );
 };

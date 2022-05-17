@@ -9,12 +9,14 @@ import { MdAdd } from "react-icons/md";
 
 export const HomeUser = () => {
   return (
-    <Stack>
+    <Stack height="100%" position="relative">
       <NavBar />
       <CurrentExpense />
       <Expenses />
       <Link to="/user/add">
-        <AddButton icon={<MdAdd />} />
+        <Stack position="absolute" bottom="10" right="0">
+          <AddButton icon={<MdAdd />} />
+        </Stack>
       </Link>
     </Stack>
   );

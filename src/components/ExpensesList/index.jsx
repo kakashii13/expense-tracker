@@ -8,12 +8,14 @@ import {
   AlertIcon,
   AlertTitle,
   useColorModeValue,
+  VStack,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useExpenseContext } from "../../context/ExpenseContext";
 import { ExpenseIcon } from "../ExpenseIcon";
-import { MdDelete } from "react-icons/md";
+import { MdDelete, MdOutlineCreditCard } from "react-icons/md";
 import { doc, getFirestore, updateDoc } from "firebase/firestore";
+import { IoWalletOutline } from "react-icons/io5";
 
 export const ExpensesList = () => {
   const [alert, setAlert] = useState(false);
@@ -53,7 +55,8 @@ export const ExpensesList = () => {
             borderRadius="1.5em"
           >
             <HStack spacing={5}>
-              <ExpenseIcon icon={item.icon} />
+              {/* <ExpenseIcon icon={item.icon} /> */}
+              <Icon as={`<${item.icon}/>`} />
               <Flex direction="column">
                 <Text fontWeight="bold">{item.category}</Text>
                 <Text fontSize="xs" color={color}>
@@ -72,7 +75,10 @@ export const ExpensesList = () => {
           </HStack>
         ))
       ) : (
-        <Text>You don't have expenses</Text>
+        <VStack justifyContent="center" alignItems="center" color="gray.400">
+          <Icon as={IoWalletOutline} height="5em" width="5em" />
+          <Text>You don't have expenses</Text>
+        </VStack>
       )}
       {alert && (
         <Alert

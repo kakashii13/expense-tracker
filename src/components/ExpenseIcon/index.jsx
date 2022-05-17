@@ -4,9 +4,9 @@ import React from "react";
 export const ExpenseIcon = ({ icon }) => {
   return (
     <Icon
-      color="white"
+      color="blue.400"
       as={icon}
-      bg="purple.500"
+      bg="blue.100"
       borderRadius=".4em"
       p=".2em"
       fontSize="2.5em"

@@ -71,7 +71,7 @@ export const Signup = () => {
             <Button
               width="100%"
               mt="20px"
-              bg="purple.500"
+              bg="blue.700"
               color="white"
               _hover={{
                 outline: "none",

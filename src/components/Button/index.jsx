@@ -8,11 +8,8 @@ export const AddButton = ({ icon, addItem }) => {
       size="lg"
       w="1em"
       borderRadius="50%"
-      bg="purple.500"
+      bg="blue.800"
       color="white"
-      position="absolute"
-      bottom="10"
-      right="10"
       icon={icon}
       onClick={addItem}
       _hover={{}}

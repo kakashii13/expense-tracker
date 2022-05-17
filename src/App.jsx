@@ -6,12 +6,20 @@ import { ContextProvider } from "./context/ExpenseContext";
 import { Login } from "./pages/Login";
 import { Signup } from "./pages/SignUp";
 import { PrivateRoute } from "./components/PrivateRoute";
+import "@fontsource/raleway/400.css";
+import "@fontsource/raleway/700.css";
 
 function App() {
   return (
     <BrowserRouter>
       <ContextProvider>
-        <Container maxW="md" h="100%">
+        <Container
+          maxW="md"
+          h="100%"
+          backgroundImage="url(/src/wave.svg)"
+          backgroundRepeat="no-repeat"
+          backgroundPosition="bottom"
+        >
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />

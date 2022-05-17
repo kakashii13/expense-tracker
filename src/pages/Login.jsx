@@ -81,7 +81,7 @@ export const Login = () => {
             <Button
               width="100%"
               mt="20px"
-              bg="purple.500"
+              bg="blue.700"
               color="white"
               _hover={{
                 outline: "none",
@@ -102,7 +102,7 @@ export const Login = () => {
         justifyContent="center"
       >
         <HStack>
-          <Text mx="0">New to Expense Tracker?</Text>
+          <Text mx="0">New?</Text>
           <Link to="/signup">
             <Text color="blue.500">Create an account</Text>
           </Link>
