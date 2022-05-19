@@ -1,11 +1,4 @@
-import {
-  Alert,
-  AlertIcon,
-  HStack,
-  IconButton,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
+import { HStack, IconButton, Stack, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AddButton } from "../components/Button";
@@ -20,6 +13,7 @@ import {
 } from "firebase/firestore";
 import { useExpenseContext } from "../context/ExpenseContext";
 import { v4 as uuidv4 } from "uuid";
+import { OwnAlert } from "../components/Alert";
 
 export const AddSpent = () => {
   const { currentUser, items } = useExpenseContext();
@@ -77,23 +71,10 @@ export const AddSpent = () => {
         <Text fontWeight="bold">Add Amount</Text>
       </HStack>
       <AddForm itemData={itemData} setItemData={setItemData} />
-      {alert ? (
-        <Alert
-          status="success"
-          borderRadius=".5em"
-          bg="white"
-          border="1px solid #ddd"
-          boxShadow="md"
-        >
-          <AlertIcon />
-          You've created a spent
-        </Alert>
-      ) : (
-        ""
-      )}
       <Stack position="absolute" bottom="10" right="0">
         <AddButton icon={<MdOutlineCheckCircle />} addItem={addItem} />
       </Stack>
+      {alert && <OwnAlert message={"You've created an spent"} />}
     </Stack>
   );
 };

@@ -46,7 +46,7 @@ export const AddForm = ({ setItemData, itemData }) => {
       <Stack my={5}>
         <FormLabel>Expense category</FormLabel>
         <Menu>
-          <MenuButton as={Button}>
+          <MenuButton as={Button} variant="outline">
             <HStack justifyContent="space-between">
               <Text>{selectCategory}</Text>
               <Icon as={MdKeyboardArrowDown} />

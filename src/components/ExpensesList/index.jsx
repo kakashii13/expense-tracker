@@ -4,19 +4,17 @@ import {
   Icon,
   Stack,
   Text,
-  Alert,
-  AlertIcon,
-  AlertTitle,
   useColorModeValue,
   VStack,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
+import { doc, getFirestore, updateDoc } from "firebase/firestore";
 import { useExpenseContext } from "../../context/ExpenseContext";
 import { ExpenseIcon } from "../ExpenseIcon";
 import { MdDelete } from "react-icons/md";
-import { doc, getFirestore, updateDoc } from "firebase/firestore";
 import { IoWalletOutline } from "react-icons/io5";
 import { CATEGORIES } from "../Categories";
+import { OwnAlert } from "../Alert";
 
 export const ExpensesList = () => {
   const [alert, setAlert] = useState(false);
@@ -45,7 +43,16 @@ export const ExpensesList = () => {
   const bg = useColorModeValue("gray.100", "whiteAlpha.50");
   const color = useColorModeValue("blackAlpha.700", "whiteAlpha.700");
   return (
-    <Stack w="100%">
+    <Stack
+      w="100%"
+      h="300px"
+      overflowY="auto"
+      css={{
+        "&::-webkit-scrollbar": {
+          display: "none",
+        },
+      }}
+    >
       {items?.expenses.length !== 0 ? (
         items.expenses?.map((item) => (
           <HStack
@@ -84,20 +91,7 @@ export const ExpensesList = () => {
           <Text>You don't have expenses</Text>
         </VStack>
       )}
-      {alert && (
-        <Alert
-          position="relative"
-          top="-390"
-          boxShadow="md"
-          status="success"
-          bg="white"
-          border="1px solid #ddd"
-          borderRadius=".5em"
-        >
-          <AlertIcon />
-          <AlertTitle>You've deleted an expense</AlertTitle>
-        </Alert>
-      )}
+      {alert && <OwnAlert message={"You've deleted an expense"} />}
     </Stack>
   );
 };
