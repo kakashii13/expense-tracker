@@ -27,13 +27,13 @@ export const ExpensesList = () => {
 
     newItems?.splice(itemIndex, 1);
 
+    setAlert(true);
     const db = getFirestore();
     const userRef = doc(db, "usersExpenses", `${currentUser.uid}`);
 
     await updateDoc(userRef, {
       expenses: newItems,
     });
-    setAlert(true);
 
     setTimeout(() => {
       setAlert(false);
@@ -45,7 +45,7 @@ export const ExpensesList = () => {
   return (
     <Stack
       w="100%"
-      h="300px"
+      h={{ base: "200px", md: "300px", lg: "500px" }}
       overflowY="auto"
       css={{
         "&::-webkit-scrollbar": {
@@ -54,7 +54,7 @@ export const ExpensesList = () => {
       }}
     >
       {items?.expenses.length !== 0 ? (
-        items.expenses?.map((item) => (
+        items?.expenses.map((item) => (
           <HStack
             key={item.id}
             justifyContent="space-between"

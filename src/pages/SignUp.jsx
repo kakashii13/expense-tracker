@@ -10,6 +10,7 @@ import {
   Input,
   Stack,
   Text,
+  useColorModeValue,
   VStack,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
@@ -20,15 +21,18 @@ export const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const { signup } = useAuth(email, password);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       await signup(email, password);
       navigate("/");
     } catch {
+      setLoading(false);
       setError("Failed to create an account");
       setTimeout(() => {
         setError("");
@@ -36,20 +40,21 @@ export const Signup = () => {
     }
   };
 
+  const border = useColorModeValue("#ddd", "#2D3748");
+
   return (
     <VStack justifyContent="center" h="100%" spacing={10}>
       <Stack
         spacing={4}
-        bg="gray.50"
         p="2em"
-        border="1px solid #ddd"
+        border={`1px solid ${border}`}
         borderRadius="0.5em"
       >
-        <Heading textAlign="center">Sign Up</Heading>
+        <Heading textAlign="center">Sign up</Heading>
         {error && (
           <Alert status="error">
             <AlertIcon />
-            <AlertTitle>Failed to create an account</AlertTitle>
+            <AlertTitle>Failed to sign up</AlertTitle>
           </Alert>
         )}
         <form onSubmit={handleSubmit}>
@@ -58,17 +63,20 @@ export const Signup = () => {
             <Input
               id="email"
               type="email"
-              bg="white"
               onChange={({ target }) => setEmail(target.value)}
             />
-            <FormLabel htmlFor="password">Password</FormLabel>
+            <HStack justifyContent="space-between">
+              <FormLabel htmlFor="password" mt="10px">
+                Password
+              </FormLabel>
+            </HStack>
             <Input
               pr="4.5rem"
-              bg="white"
               type="password"
               onChange={({ target }) => setPassword(target.value)}
             />
             <Button
+              isLoading={loading ? true : false}
               width="100%"
               mt="20px"
               bg="blue.700"
@@ -85,7 +93,7 @@ export const Signup = () => {
         </form>
       </Stack>
       <HStack
-        border="1px solid #ddd"
+        border={`1px solid ${border}`}
         borderRadius="0.5em"
         p="1em"
         w="100%"

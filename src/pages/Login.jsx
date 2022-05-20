@@ -40,15 +40,14 @@ export const Login = () => {
     }
   };
 
-  const bg = useColorModeValue("gray.50", "gray.700");
+  const border = useColorModeValue("#ddd", "#2D3748");
 
   return (
     <VStack justifyContent="center" h="100%" spacing={10}>
       <Stack
         spacing={4}
-        bg={bg}
         p="2em"
-        border="1px solid gray.500"
+        border={`1px solid ${border}`}
         borderRadius="0.5em"
       >
         <Heading textAlign="center">Log In</Heading>
@@ -62,9 +61,10 @@ export const Login = () => {
           <FormControl isRequired>
             <FormLabel htmlFor="email">Email</FormLabel>
             <Input
+              placeholder="Example@example.com"
               id="email"
               type="email"
-              bg="white"
+              // bg="white"
               onChange={({ target }) => setEmail(target.value)}
             />
             <HStack justifyContent="space-between">
@@ -77,7 +77,7 @@ export const Login = () => {
             </HStack>
             <Input
               pr="4.5rem"
-              bg="white"
+              // bg="white"
               type="password"
               onChange={({ target }) => setPassword(target.value)}
             />
@@ -99,7 +99,7 @@ export const Login = () => {
         </form>
       </Stack>
       <HStack
-        border="1px solid #ddd"
+        border={`1px solid ${border}`}
         borderRadius="0.5em"
         p="1em"
         w="100%"
