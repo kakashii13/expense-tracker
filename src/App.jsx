@@ -8,6 +8,7 @@ import { Signup } from "./pages/SignUp";
 import { PrivateRoute } from "./components/PrivateRoute";
 import "@fontsource/raleway/400.css";
 import "@fontsource/raleway/700.css";
+import { PasswordReset } from "./pages/PasswordReset";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/password-reset" element={<PasswordReset />} />
             <Route
               path="/"
               element={

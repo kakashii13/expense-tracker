@@ -6,7 +6,7 @@ export const CurrentExpense = () => {
   const { items } = useExpenseContext();
 
   const totalSpent = items?.expenses
-    .map((item) => item.amount)
+    ?.map((item) => item.amount)
     .reduce((el, acc) => Number(el) + Number(acc), []);
 
   return (

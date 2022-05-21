@@ -71,7 +71,7 @@ export const Login = () => {
               <FormLabel htmlFor="password" mt="10px">
                 Password
               </FormLabel>
-              <Link to="/forgot-password">
+              <Link to="/password-reset">
                 <Text color="blue.500">Forgot password?</Text>
               </Link>
             </HStack>
@@ -84,7 +84,7 @@ export const Login = () => {
             <Button
               isLoading={loading ? true : false}
               width="100%"
-              mt="20px"
+              mt="1em"
               bg="blue.700"
               color="white"
               _hover={{

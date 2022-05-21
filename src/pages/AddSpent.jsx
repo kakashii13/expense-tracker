@@ -68,7 +68,7 @@ export const AddSpent = () => {
         <Link to="/">
           <IconButton icon={<MdKeyboardArrowLeft />} fontSize="1.5em" />
         </Link>
-        <Text fontWeight="bold">Add Amount</Text>
+        <Text fontWeight="bold">Add Expense</Text>
       </HStack>
       <AddForm itemData={itemData} setItemData={setItemData} />
       <Stack position="absolute" bottom="10" right="0">

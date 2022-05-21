@@ -45,15 +45,26 @@ export const ExpensesList = () => {
   return (
     <Stack
       w="100%"
-      h={{ base: "200px", md: "300px", lg: "500px" }}
+      h="200px"
       overflowY="auto"
       css={{
         "&::-webkit-scrollbar": {
           display: "none",
         },
+        "@media(min-height: 800px)": {
+          height: "400px",
+        },
+        "@media(min-height: 1000px)": {
+          height: "600px",
+        },
       }}
     >
-      {items?.expenses.length !== 0 ? (
+      {!items?.expenses || items?.expenses.length === 0 ? (
+        <VStack justifyContent="center" alignItems="center" color="gray.400">
+          <Icon as={IoWalletOutline} height="5em" width="5em" />
+          <Text>You don't have expenses</Text>
+        </VStack>
+      ) : (
         items?.expenses.map((item) => (
           <HStack
             key={item.id}
@@ -85,11 +96,6 @@ export const ExpensesList = () => {
             </HStack>
           </HStack>
         ))
-      ) : (
-        <VStack justifyContent="center" alignItems="center" color="gray.400">
-          <Icon as={IoWalletOutline} height="5em" width="5em" />
-          <Text>You don't have expenses</Text>
-        </VStack>
       )}
       {alert && <OwnAlert message={"You've deleted an expense"} />}
     </Stack>

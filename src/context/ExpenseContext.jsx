@@ -39,7 +39,7 @@ export const ContextProvider = ({ children }) => {
     getExpenses();
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 3000);
   }, [currentUser]);
 
   return (
