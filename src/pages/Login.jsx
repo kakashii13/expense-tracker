@@ -13,8 +13,10 @@ import {
   useColorModeValue,
   VStack,
 } from "@chakra-ui/react";
+import { browserLocalPersistence, setPersistence } from "firebase/auth";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { auth } from "../firebase/config";
 import { useAuth } from "../hooks/useAuth";
 
 export const Login = () => {
@@ -40,6 +42,11 @@ export const Login = () => {
     }
   };
 
+  const fillEmail = () => {
+    setEmail("test@test.com");
+    setPassword(123456);
+  };
+
   const border = useColorModeValue("#ddd", "#2D3748");
 
   return (
@@ -59,12 +66,17 @@ export const Login = () => {
         )}
         <form onSubmit={handleSubmit}>
           <FormControl isRequired>
-            <FormLabel htmlFor="email">Email</FormLabel>
+            <HStack justifyContent="space-between">
+              <FormLabel htmlFor="email">Email</FormLabel>
+              <Text color="blue.500" cursor="pointer" onClick={fillEmail}>
+                Email test
+              </Text>
+            </HStack>
             <Input
               placeholder="Example@example.com"
               id="email"
               type="email"
-              // bg="white"
+              value={email}
               onChange={({ target }) => setEmail(target.value)}
             />
             <HStack justifyContent="space-between">
@@ -77,7 +89,7 @@ export const Login = () => {
             </HStack>
             <Input
               pr="4.5rem"
-              // bg="white"
+              value={password}
               type="password"
               onChange={({ target }) => setPassword(target.value)}
             />

@@ -1,4 +1,12 @@
-import { Badge, Box, Stack, VStack } from "@chakra-ui/react";
+import {
+  Badge,
+  Box,
+  HStack,
+  NumberInput,
+  Stack,
+  Stat,
+  VStack,
+} from "@chakra-ui/react";
 import React from "react";
 import { useExpenseContext } from "../../context/ExpenseContext";
 
@@ -12,12 +20,16 @@ export const CurrentExpense = () => {
   return (
     <Stack direction="column">
       <VStack h="auto" justifyContent="space-between" p="1.6em">
-        <Box fontSize="4em">
+        <HStack fontSize="4em">
           <Badge bg="inhret" fontSize=".5em">
             $
           </Badge>
-          {!items?.expenses || items?.expenses.length === 0 ? "0" : totalSpent}
-        </Box>
+          <Stat>
+            {!items?.expenses || items?.expenses.length === 0
+              ? "0"
+              : totalSpent}
+          </Stat>
+        </HStack>
       </VStack>
     </Stack>
   );

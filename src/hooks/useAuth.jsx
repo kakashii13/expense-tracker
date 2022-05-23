@@ -1,6 +1,8 @@
 import {
+  browserLocalPersistence,
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
+  setPersistence,
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
@@ -12,6 +14,7 @@ export const useAuth = (email, password) => {
   };
 
   const login = () => {
+    setPersistence(auth, browserLocalPersistence);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
